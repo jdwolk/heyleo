@@ -1,0 +1,17 @@
+{
+  "name": "heyleo",
+  "description": "Make Trello cards for Leo by slash messaging from Slack",
+  "logo": "",
+  "repository": "https://github.com/jdwolk/heyleo",
+  "env": {
+    "BUILDPACK_URL": {
+      "description": "Heroku buildpack for deploying Haskell apps",
+      "value": "https://github.com/mietek/haskell-on-heroku"
+    },
+    "TUTORIAL_HOME": {
+      "description": "Welcome message",
+      "required": false,
+      "value": "Welcome to Haskell on Heroku"
+    }
+  }
+}
