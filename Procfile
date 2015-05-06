@@ -1,1 +1,1 @@
-web: cabal run -- -p $PORT
+web: PORT=$PORT ./dist/build/heyleo/heyleo
