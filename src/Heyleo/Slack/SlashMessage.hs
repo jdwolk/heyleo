@@ -2,10 +2,11 @@
 
 module Heyleo.Slack.SlashMessage where
 
-import Data.Aeson (withObject, FromJSON, (.:), parseJSON, decode)
+import Data.Aeson (withObject, FromJSON, (.:), parseJSON)
 import Control.Applicative ((<$>), (<*>))
 
-import Heyleo.Slack.SlashCommand
+import Heyleo.Utils.Params (getParam, Params)
+import Heyleo.Slack.SlashCommand (blankCommand, fromString, SlashCommand(..))
 
 data SlashMessage = SlashMessage {
     token        :: String -- 'dslkfjDSLKJdflk123',
@@ -31,4 +32,20 @@ instance FromJSON SlashMessage where
       <*> o .: "user_name"
       <*> o .: "command"
       <*> o .: "text"
+
+-- TODO data type for fromParams, similar to fromJSON
+-- TODO generic serialization???
+-- TODO Reader monad for passing along params?
+fromParams :: Params -> SlashMessage
+fromParams params = SlashMessage {
+  token       = getParam "token" "" params
+, teamID      = getParam "team_id" "" params
+, teamDomain  = getParam "team_domain" "" params
+, channelID   = getParam "channel_id" "" params
+, channelName = getParam "channel_name" "" params
+, userID      = getParam "user_id" "" params
+, userName    = getParam "user_name" "" params
+, command     = fromString $ getParam "command" (show blankCommand) params
+, msgText     = getParam "text" "" params
+}
 

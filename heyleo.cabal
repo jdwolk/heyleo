@@ -15,12 +15,16 @@ library
   exposed-modules:      Heyleo.Slack.SlashMessage
                       , Heyleo.Slack.SlashCommand
                       , Heyleo.Slack.SlashTest
+                      , Heyleo.Utils.Data
   build-depends:        base
                       , Spock
                       , aeson
                       , bytestring
                       , utf8-string
                       , text
+                      , mtl
+                      , transformers
+                      , containers
   default-language:    Haskell2010
 
 executable heyleo
@@ -33,5 +37,8 @@ executable heyleo
                      , bytestring
                      , utf8-string
                      , text
+                     , mtl
+                     , transformers
+                     , containers
   hs-source-dirs:      src
   default-language:    Haskell2010
