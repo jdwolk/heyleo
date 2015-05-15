@@ -1,11 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Heyleo.Slack.SlashMessage where
+module Heyleo.Slack.SlashMessage (
+  SlashMessage(..),
+  fromParams
+) where
 
 import Data.Aeson (withObject, FromJSON, (.:), parseJSON)
 import Control.Applicative ((<$>), (<*>))
-
-import Heyleo.Utils.Params (getParam, Params)
+import Heyleo.Data.Message (Message(sender, text))
+import Heyleo.Data.Params (getParam, Params)
 import Heyleo.Slack.SlashCommand (blankCommand, fromString, SlashCommand(..))
 
 data SlashMessage = SlashMessage {
@@ -19,6 +22,10 @@ data SlashMessage = SlashMessage {
   , command      :: SlashCommand -- '/heyleo',
   , msgText      :: String -- 'awesomeness'
 } deriving (Show)
+
+instance Message SlashMessage where
+  sender = userName
+  text = msgText
 
 instance FromJSON SlashMessage where
   parseJSON = withObject "slashMessage" $ \o ->
@@ -38,14 +45,14 @@ instance FromJSON SlashMessage where
 -- TODO Reader monad for passing along params?
 fromParams :: Params -> SlashMessage
 fromParams params = SlashMessage {
-  token       = getParam "token" "" params
-, teamID      = getParam "team_id" "" params
-, teamDomain  = getParam "team_domain" "" params
-, channelID   = getParam "channel_id" "" params
-, channelName = getParam "channel_name" "" params
-, userID      = getParam "user_id" "" params
-, userName    = getParam "user_name" "" params
+  token       = read $ getParam "token" "" params
+, teamID      = read $ getParam "team_id" "" params
+, teamDomain  = read $ getParam "team_domain" "" params
+, channelID   = read $ getParam "channel_id" "" params
+, channelName = read $ getParam "channel_name" "" params
+, userID      = read $ getParam "user_id" "" params
+, userName    = read $ getParam "user_name" "" params
 , command     = fromString $ getParam "command" (show blankCommand) params
-, msgText     = getParam "text" "" params
+, msgText     = read $ getParam "text" "" params
 }
 

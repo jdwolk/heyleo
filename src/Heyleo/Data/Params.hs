@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Heyleo.Utils.Params (
+module Heyleo.Data.Params (
   makeParams,
   getParam,
   Params(getParams)
