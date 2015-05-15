@@ -5,7 +5,7 @@ module Heyleo.Trello.Api (
   createCard
 ) where
 
-import Heyleo.Data.Message (text, Message)
+import Heyleo.Data.Message (text, sender, Message)
 import Network.Wreq (
   post, responseStatus, statusCode, FormParam((:=)), Response
   )
@@ -49,15 +49,19 @@ handleCreateStatus msg status = case status of
   200 -> Right $ text msg
   _   -> Left "Card could not be created"
 
+cardDescription :: Message m => m -> String
+cardDescription msg = "(From " ++ (sender msg) ++ ")"
+
 createCard :: Message m => TrelloConfig -> m -> IO (Either String String)
 createCard cfg msg = do
   let queryParams = [("key", trelloKey cfg), ("token", trelloToken cfg)]
       url = makeURL cardsURL queryParams
   res <- post url [
-    "name"      := text msg,
-    "idList"    := listID cfg,
-    "due"       := (),
-    "urlSource" := ()
+    "name"        := text msg,
+    "desc"        := cardDescription msg,
+    "idList"      := listID cfg,
+    "due"         := (),
+    "urlSource"   := ()
     ]
   status <- return $ getStatus res
   return $ handleCreateStatus msg status

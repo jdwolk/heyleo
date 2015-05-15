@@ -6,7 +6,6 @@ import Web.Spock.Safe (params, runSpock, spockT, text, post, get, root)
 import Control.Monad.IO.Class (liftIO)
 import Data.Maybe (fromMaybe)
 import System.Environment (lookupEnv, getEnv)
-import Control.Applicative ((<*>), (<$>))
 import qualified Configuration.Dotenv as Dotenv
 import qualified Data.Text as T
 
