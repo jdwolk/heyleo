@@ -54,9 +54,9 @@ createCard cfg msg = do
   let queryParams = [("key", trelloKey cfg), ("token", trelloToken cfg)]
       url = makeURL cardsURL queryParams
   res <- post url [
-    "name" := text msg,
-    "idList" := listID cfg,
-    "due" := (),
+    "name"      := text msg,
+    "idList"    := listID cfg,
+    "due"       := (),
     "urlSource" := ()
     ]
   status <- return $ getStatus res

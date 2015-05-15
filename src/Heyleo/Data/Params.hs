@@ -16,5 +16,5 @@ makeParams ps = Params $ M.map T.unpack $ M.fromList ps
 
 getParam :: String -> String -> Params -> String
 getParam k d pms = show $ M.findWithDefault d key params where
-  key = T.pack k
+  key    = T.pack k
   params = getParams pms

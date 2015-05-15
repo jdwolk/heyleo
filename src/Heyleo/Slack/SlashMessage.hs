@@ -15,12 +15,12 @@ data SlashMessage = SlashMessage {
     token        :: String -- 'dslkfjDSLKJdflk123',
   , teamID       :: String -- 'TSH34HJD',
   , teamDomain   :: String -- 'philosophie',
-  , channelID    :: String -- 'D03BHK09L',
+  , channelID    :: String -- 'DLKJAD9874',
   , channelName  :: String -- 'directmessage',
-  , userID       :: String -- 'U03BHK094',
-  , userName     :: String -- 'jdwolk',
+  , userID       :: String -- 'LKJD98UK',
+  , userName     :: String -- 'superdude',
   , command      :: SlashCommand -- '/heyleo',
-  , msgText      :: String -- 'awesomeness'
+  , msgText      :: String -- 'make me a sammich'
 } deriving (Show)
 
 instance Message SlashMessage where

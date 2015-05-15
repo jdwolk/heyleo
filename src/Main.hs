@@ -6,6 +6,7 @@ import Web.Spock.Safe (params, runSpock, spockT, text, post, get, root)
 import Control.Monad.IO.Class (liftIO)
 import Data.Maybe (fromMaybe)
 import System.Environment (lookupEnv, getEnv)
+import Control.Applicative ((<*>), (<$>))
 import qualified Configuration.Dotenv as Dotenv
 import qualified Data.Text as T
 
@@ -21,30 +22,30 @@ configFromEnv = do
   lID     <- getEnv "LIST_ID"
   putStrLn "Loaded Trello config from environment"
   return TrelloConfig {
-    trelloKey = key
+    trelloKey   = key
   , trelloToken = token
-  , boardID = bID
-  , listID = lID
+  , boardID     = bID
+  , listID      = lID
   }
 
 handleCreate :: Either String String -> String
-handleCreate (Right _) = "Added your message to Leo's board!"
-handleCreate (Left s) = s
+handleCreate (Right _)  = "Added your message to Leo's board!"
+handleCreate (Left s)   = s
 
 main :: IO ()
 main = do
-    _ <- Dotenv.loadFile False "./.env"
+    _         <- Dotenv.loadFile False "./.env"
     maybePort <- lookupEnv "PORT"
-    port <- return . read $ fromMaybe "8080" $ maybePort
+    port      <- return . read $ fromMaybe "8080" $ maybePort
     trelloCfg <- configFromEnv
     runSpock port . spockT id $ do
       get root $ do
         text "Heyleo server is runnning"
       post root $ do
-        ps <- params
-        hash <- return $ makeParams ps
-        msg <- return $ fromParams hash
-        result <- liftIO $ createCard trelloCfg msg
+        ps        <- params
+        hash      <- return $ makeParams ps
+        msg       <- return $ fromParams hash
+        result    <- liftIO $ createCard trelloCfg msg
         resultTxt <- return $ handleCreate result
         liftIO $ putStrLn resultTxt
         text $ T.pack resultTxt
