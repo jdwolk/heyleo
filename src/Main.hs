@@ -6,6 +6,7 @@ import Web.Spock.Safe (params, runSpock, spockT, text, post, get, root)
 import Control.Monad.IO.Class (liftIO)
 import Data.Maybe (fromMaybe)
 import System.Environment (lookupEnv, getEnv)
+import System.Directory (doesFileExist)
 import qualified Configuration.Dotenv as Dotenv
 import qualified Data.Text as T
 
@@ -33,7 +34,8 @@ handleCreate (Left s)   = s
 
 main :: IO ()
 main = do
-    _         <- Dotenv.loadFile False "./.env"
+    exists    <- doesFileExist "./.env"
+    _         <- if exists then Dotenv.loadFile False "./.env" else putStrLn "No .env file found"
     maybePort <- lookupEnv "PORT"
     port      <- return . read $ fromMaybe "8080" $ maybePort
     trelloCfg <- configFromEnv
