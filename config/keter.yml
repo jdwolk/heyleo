@@ -1,0 +1,2 @@
+exec: ../dist/build/Heyleo/heyleo
+host: 45.55.31.50
