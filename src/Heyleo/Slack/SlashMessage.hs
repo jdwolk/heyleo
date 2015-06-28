@@ -12,15 +12,15 @@ import Heyleo.Data.Params (getParam, Params)
 import Heyleo.Slack.SlashCommand (blankCommand, fromString, SlashCommand(..))
 
 data SlashMessage = SlashMessage {
-    token        :: String -- 'dslkfjDSLKJdflk123',
-  , teamID       :: String -- 'TSH34HJD',
-  , teamDomain   :: String -- 'philosophie',
-  , channelID    :: String -- 'DLKJAD9874',
-  , channelName  :: String -- 'directmessage',
-  , userID       :: String -- 'LKJD98UK',
-  , userName     :: String -- 'superdude',
-  , command      :: SlashCommand -- '/heyleo',
-  , msgText      :: String -- 'make me a sammich'
+  token        :: String -- 'dslkfjDSLKJdflk123',
+, teamID       :: String -- 'TSH34HJD',
+, teamDomain   :: String -- 'philosophie',
+, channelID    :: String -- 'DLKJAD9874',
+, channelName  :: String -- 'directmessage',
+, userID       :: String -- 'LKJD98UK',
+, userName     :: String -- 'superdude',
+, command      :: SlashCommand -- '/heyleo',
+, msgText      :: String -- 'make me a sammich'
 } deriving (Show)
 
 instance Message SlashMessage where
