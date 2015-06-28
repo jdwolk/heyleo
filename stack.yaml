@@ -1,0 +1,5 @@
+flags: {}
+packages:
+- '.'
+extra-deps: [dotenv-0.1.0.8]
+resolver: lts-2.15

@@ -8,7 +8,7 @@ description:         Make Trello cards for Leo by slash messaging from Slack
 author:              Jordaniel Wolk
 maintainer:          jd@gophilosophie.com
 build-type:          Simple
-cabal-version:       >=1.20
+cabal-version:       >=1.18.1.5
 
 library
   hs-source-dirs: src
@@ -26,7 +26,7 @@ library
                       , mtl
                       , transformers
                       , containers
-                      , wreq >= 0.4.0.0
+                      , wreq
                       , lens
                       , lens-aeson
                       , dotenv
@@ -46,7 +46,7 @@ executable heyleo
                      , mtl
                      , transformers
                      , containers
-                     , wreq >= 0.4.0.0
+                     , wreq
                      , lens
                      , lens-aeson
                      , dotenv
