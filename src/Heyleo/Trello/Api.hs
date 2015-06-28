@@ -17,6 +17,7 @@ data TrelloConfig = TrelloConfig {
 , trelloToken   :: String
 , boardID       :: String
 , listID        :: String
+, memberIDs     :: String -- comma separated string of IDs
 } deriving (Show)
 
 apiBase :: String
@@ -61,7 +62,8 @@ createCard cfg msg = do
     "desc"        := cardDescription msg,
     "idList"      := listID cfg,
     "due"         := (),
-    "urlSource"   := ()
+    "urlSource"   := (),
+    "idMembers"   := memberIDs cfg
     ]
   status <- return $ getStatus res
   return $ handleCreateStatus msg status

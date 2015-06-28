@@ -20,12 +20,14 @@ configFromEnv = do
   token   <- getEnv "TRELLO_TOKEN"
   bID     <- getEnv "BOARD_ID"
   lID     <- getEnv "LIST_ID"
+  mIDs    <- getEnv "MEMBER_IDS"
   putStrLn "Loaded Trello config from environment"
   return TrelloConfig {
     trelloKey   = key
   , trelloToken = token
   , boardID     = bID
   , listID      = lID
+  , memberIDs   = mIDs
   }
 
 handleCreate :: Either String String -> String
