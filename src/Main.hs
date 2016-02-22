@@ -16,18 +16,18 @@ import Heyleo.Trello.Api (TrelloConfig(..), createCard)
 
 configFromEnv :: IO TrelloConfig
 configFromEnv = do
-  key     <- getEnv "TRELLO_KEY"
-  token   <- getEnv "TRELLO_TOKEN"
-  bID     <- getEnv "BOARD_ID"
-  lID     <- getEnv "LIST_ID"
-  mIDs    <- getEnv "MEMBER_IDS"
+  key  <- getEnv "TRELLO_KEY"
+  token<- getEnv "TRELLO_TOKEN"
+  bID  <- getEnv "BOARD_ID"
+  lID  <- getEnv "LIST_ID"
+  mIDs <- getEnv "MEMBER_IDS"
   putStrLn "Loaded Trello config from environment"
   return TrelloConfig {
-    trelloKey   = key
-  , trelloToken = token
-  , boardID     = bID
-  , listID      = lID
-  , memberIDs   = mIDs
+    trelloKey     = key
+    , trelloToken = token
+    , boardID     = bID
+    , listID      = lID
+    , memberIDs   = mIDs
   }
 
 handleCreate :: Either String String -> String

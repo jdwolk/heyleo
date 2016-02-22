@@ -1,5 +1,7 @@
 flags: {}
+system-ghc: false
 packages:
 - '.'
-extra-deps: [dotenv-0.1.0.8]
-resolver: lts-2.15
+extra-deps: []
+resolver: lts-5.2
+

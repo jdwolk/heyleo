@@ -29,8 +29,8 @@ library
                       , wreq
                       , lens
                       , lens-aeson
-                      , dotenv
                       , directory
+                      , dotenv
   default-language:    Haskell2010
 
 executable heyleo
@@ -49,7 +49,7 @@ executable heyleo
                      , wreq
                      , lens
                      , lens-aeson
-                     , dotenv
                      , directory
+                     , dotenv
   hs-source-dirs:      src
   default-language:    Haskell2010
